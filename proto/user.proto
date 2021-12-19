@@ -8,3 +8,9 @@ message User {
   string cellphone = 3;
   string address = 4;
 }
+
+message Empty {}
+
+service UserService {
+  rpc Add (User) returns (Empty);
+}

@@ -29,4 +29,5 @@ message Empty {}
 service OrderService {
   rpc List (Order) returns (Order);
   rpc AddProduct (OrderProduct) returns (Empty);
+  rpc RemoveProduct (OrderProduct) returns (Empty);
 }

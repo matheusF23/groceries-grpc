@@ -1,18 +1,15 @@
 syntax = "proto3";
 
-import "./models.proto";
+import "./user.proto";
+import "./product.proto";
 
 package order;
-
-message ProductList {
-  repeated models.Product products = 1;
-}
 
 message Order {
   int32 id = 1;
   double totalPrice = 2;
-  models.User user = 3;
-  ProductList products = 4;
+  user.User user = 3;
+  product.ProductList products = 4;
 }
 
 message Empty {}

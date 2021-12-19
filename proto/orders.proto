@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "./models.proto";
+
+package order;
+
+message ProductList {
+  repeated models.Product products = 1;
+}
+
+message Order {
+  int32 id = 1;
+  double totalPrice = 2;
+  models.User user = 3;
+  ProductList products = 4;
+}
+
+message Empty {}
+
+service OrderService {
+  rpc List (Empty) returns (ProductList);
+}

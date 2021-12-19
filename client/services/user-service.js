@@ -2,7 +2,7 @@ const prompt = require("prompt-sync")()
 const { v4: uuidv4 } = require('uuid');
 
 function getData(field) {
-  let response = prompt(`\nQual é o seu ${field}? `)
+  let response = prompt(`Qual é o seu ${field}? `)
   while (!response) {
     console.log(`Opa, você esqueceu de digitar seu ${field}!`)
     response = prompt(`Qual é o seu ${field}? `)

@@ -20,10 +20,10 @@ class CategoryService {
       console.log(`${category.id}: ${category.description}`)
     })
 
-    let response = Number(prompt('\nResponda: '))
+    let response = Number(prompt('Responda: '))
     while (!response || response < 0 || response > categories.length) {
       console.log('Escolha um dos números indicados! ')
-      response = Number(prompt('\nResponda: '))
+      response = Number(prompt('Responda: '))
     }
 
     return response

@@ -4,7 +4,9 @@ const protoLoader = require('@grpc/proto-loader')
 const { PROTO_CONFIG } = require('../utils/proto-config')
 const protoPaths = require('../utils/proto-paths')
 
-const { ProductService, CategoryService, OrderService, UserService } = require('./services')
+const App = require('./app')
+
+const HOST = 'localhost:50051'
 
 const productPackageDefinition = protoLoader.loadSync(protoPaths.PRODUCT_PROTO_PATH, PROTO_CONFIG)
 const categoryPackageDefinition = protoLoader.loadSync(protoPaths.CATEGORY_PROTO_PATH, PROTO_CONFIG)
@@ -16,19 +18,11 @@ const categoryPackage = grpc.loadPackageDefinition(categoryPackageDefinition).ca
 const orderPackage = grpc.loadPackageDefinition(orderPackageDefinition).order
 const userPackage = grpc.loadPackageDefinition(userPackageDefinition).user
 
-const productServiceProto = productPackage.ProductService
-const categoryServiceProto = categoryPackage.CategoryService
-const orderServiceProto = orderPackage.OrderService
-const userServiceProto = userPackage.UserService
+const productClient = new productPackage.ProductService(HOST, grpc.credentials.createInsecure())
+const categoryClient = new categoryPackage.CategoryService(HOST, grpc.credentials.createInsecure())
+const orderClient = new orderPackage.OrderService(HOST, grpc.credentials.createInsecure())
+const userClient = new userPackage.UserService(HOST, grpc.credentials.createInsecure())
 
-const server = new grpc.Server()
+const app = new App({ productClient, categoryClient, orderClient, userClient })
 
-server.addService(productServiceProto.service, ProductService)
-server.addService(categoryServiceProto.service, CategoryService)
-server.addService(orderServiceProto.service, OrderService)
-server.addService(userServiceProto.service, UserService)
-
-server.bindAsync('127.0.0.1:50051', grpc.ServerCredentials.createInsecure(), (error, port) => {
-  console.log(`Server running - Port: ${port}`);
-  server.start()
-})
+app.init()

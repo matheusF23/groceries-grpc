@@ -9,11 +9,24 @@ message Order {
   int32 id = 1;
   double totalPrice = 2;
   user.User user = 3;
-  product.ProductList products = 4;
+  repeated ProductItem products = 4;
+}
+
+message ProductItem {
+  product.Product product = 1;
+  int32 qty = 2;
+}
+
+message OrderProduct {
+  int32 id = 1;
+  int32 userId = 2;
+  int32 productId = 3;
+  int32 qty = 4;
 }
 
 message Empty {}
 
 service OrderService {
   rpc List (Order) returns (Order);
+  rpc AddProduct (OrderProduct) returns (Empty);
 }

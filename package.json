@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.4.4",
-    "@grpc/proto-loader": "^0.6.7"
+    "@grpc/proto-loader": "^0.6.7",
+    "prompt-sync": "^4.2.0",
+    "uuid": "^8.3.2"
   }
 }

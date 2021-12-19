@@ -1,0 +1,19 @@
+{
+  "name": "groceries-grpc",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:matheusF23/groceries-grpc.git",
+  "author": "Matheus Figueiredo <matheus_figueiredo18@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon server/server.js",
+    "client": "node client/client.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.4.4",
+    "@grpc/proto-loader": "^0.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

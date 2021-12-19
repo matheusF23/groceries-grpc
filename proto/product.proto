@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "./category.proto";
+
 package product;
 
 message Product {
@@ -7,7 +9,7 @@ message Product {
   string description = 2;
   int32 stock = 3;
   double price = 4;
-  string category = 5;
+  category.Category category = 5;
 }
 
 message ProductList {
@@ -18,4 +20,5 @@ message Empty {}
 
 service ProductService {
   rpc List (Empty) returns (ProductList);
+  rpc ListByCategory (category.CategoryID) returns (ProductList);
 }

@@ -11,7 +11,7 @@ message Product {
 }
 
 message ProductList {
-  repeated product.Product products = 1;
+  repeated Product products = 1;
 }
 
 message Empty {}

@@ -20,5 +20,5 @@ message Empty {}
 
 service ProductService {
   rpc List (Empty) returns (ProductList);
-  rpc ListByCategory (category.CategoryID) returns (ProductList);
+  rpc ListByCategory (category.Category) returns (ProductList);
 }

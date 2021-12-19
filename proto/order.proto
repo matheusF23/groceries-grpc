@@ -15,5 +15,5 @@ message Order {
 message Empty {}
 
 service OrderService {
-  rpc List (Empty) returns (ProductList);
+  rpc List (Order) returns (Order);
 }

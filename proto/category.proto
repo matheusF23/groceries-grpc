@@ -7,10 +7,6 @@ message Category {
   string description = 2;
 }
 
-message CategoryID {
-  int32 id = 1;
-}
-
 message CategoryList {
   repeated Category categories = 1;
 }

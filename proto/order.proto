@@ -18,8 +18,8 @@ message ProductItem {
 }
 
 message OrderProduct {
-  int32 id = 1;
-  int32 userId = 2;
+  string id = 1;
+  string userId = 2;
   int32 productId = 3;
   int32 qty = 4;
 }

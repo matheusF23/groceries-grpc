@@ -6,7 +6,7 @@ import "./product.proto";
 package order;
 
 message Order {
-  int32 id = 1;
+  string id = 1;
   double totalPrice = 2;
   user.User user = 3;
   repeated ProductItem products = 4;

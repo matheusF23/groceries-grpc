@@ -29,7 +29,7 @@ class ProductService {
     console.log('\nEstes são todos os produtos disponíveis no momento:')
     const { products } = await ProductClient.list({})
     products.forEach(product => {
-      console.log(`${product.id}: ${product.description}. Preço: ${product.price}. Estoque: ${product.stock}.`)
+      console.log(`${product.id}: ${product.description}. Preço: R$ ${product.price}. Estoque: ${product.stock}.`)
     })
 
     const choice = ProductService.selectProduct(products)
@@ -42,7 +42,7 @@ class ProductService {
 
     console.log(`\nEstes são todos os produtos disponíveis na categoria selecionada:`)
     products.forEach(product => {
-      console.log(`${product.id}: ${product.description}. Preço: ${product.price}. Estoque: ${product.stock}.`)
+      console.log(`${product.id}: ${product.description}. Preço: R$ ${product.price}. Estoque: ${product.stock}.`)
     })
 
     const choice = ProductService.selectProduct(products)

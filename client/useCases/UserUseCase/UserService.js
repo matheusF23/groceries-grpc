@@ -1,6 +1,9 @@
 const prompt = require("prompt-sync")()
 const { v4: uuidv4 } = require('uuid');
 
+const UserClient = require('./UserClient')
+
+
 function getData(field) {
   let response = prompt(`Qual é o seu ${field}? `)
   while (!response) {
@@ -12,20 +15,14 @@ function getData(field) {
 }
 
 class UserService {
-  constructor(userClient) {
-    this.userClient = userClient
-  }
-
-  addUser() {
+  static async addUser() {
     const id = uuidv4()
-    let name = getData('name')
-    let cellphone = getData('cellphone')
-    let address = getData('address')
+    let name = getData('nome')
+    let cellphone = getData('telefone')
+    let address = getData('endereço')
 
-    this.userClient.add({ id, name, cellphone, address }, (err, result) => {
-      if (err) throw err
-    })
-
+    await UserClient.add({id, name, cellphone, address})
+    
     return id
   }
 }

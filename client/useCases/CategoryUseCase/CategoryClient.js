@@ -1,5 +1,5 @@
 
-const load = require('../loader')
+const load = require('../../loader')
 
 const CategoryClient = load({
   serviceName: 'CategoryService',

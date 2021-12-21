@@ -1,23 +1,18 @@
-const CategoryService = require('./CategoryUserCase/CategoryService')
+const CategoryService = require('./useCases/CategoryUseCase/CategoryService')
+const UserService = require('./useCases/UserUseCase/UserService')
 // const UserService = require('./services/user-service')
 // const ProductService = require('./services/product-service')
 
 async function main() {
   console.log('\nSeja bem vindo ao mercadinho SD!')
-//     const user = this.userService.addUser()
+    const user = await UserService.addUser()
+
     const category = await CategoryService.getUserCategory()
-    console.log(category)
 //     if ( category === 0) {
 //       this.productService
 //     }
 }
 
-// class App {
-//   constructor(clients) {
-//     this.userService = new UserService(clients.userClient)
-//     this.categoryService = new CategoryService(clients.categoryClient)
-//     this.productService = new ProductService(clients.productService)
-//   }
 
 //   init() {
 //     console.log('\nSeja bem vindo ao mercadinho SD!')

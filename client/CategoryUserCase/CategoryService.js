@@ -1,19 +1,17 @@
 const prompt = require("prompt-sync")()
 
+const CategoryClient = require('./CategoryClient')
+
 class CategoryService {
-  constructor(categoryClient) {
-    this.categoryClient = categoryClient
-  }
-  listCategories() {
-    this.categoryClient.list({}, (err, categories) => {
-      if (err) throw err
-      console.log(categories)
-    })
+  static async getCategories() {
+    const { categories } = await CategoryClient.list({})
+
+    return categories
   }
 
-  getCategory() {
-    const { categories } = this.listCategories()
-    
+  static async getUserCategory() {
+    const categories = await CategoryService.getCategories()
+
     console.log('\nQual categoria você deseja?')
     console.log('0: Todas')
     categories.forEach(category => {
@@ -22,6 +20,7 @@ class CategoryService {
 
     let response = Number(prompt('Responda: '))
     while (!response || response < 0 || response > categories.length) {
+      if (response === 0) break
       console.log('Escolha um dos números indicados! ')
       response = Number(prompt('Responda: '))
     }

@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "server": "node server/server.js",
-    "client": "node client/client.js"
+    "client": "node client/app.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.4.4",

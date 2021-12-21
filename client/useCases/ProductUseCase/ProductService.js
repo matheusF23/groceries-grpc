@@ -4,30 +4,40 @@ const ProductClient = require('./ProductClient')
 
 class ProductService {
   static selectProduct(products) {
-    const productIds = products.map(product => product.id)
+    const productMap = {}
+    products.forEach(product => productMap[product.id] = product.stock)
+    const productsId = Object.keys(productMap)
 
-    let response = Number(prompt('Escolha um produto: '))
-    while (!response || !productIds.includes(response)) {
+    let idProduct = Number(prompt('Escolha um produto: '))
+    while (!idProduct || !productsId.includes(idProduct + '')) {
       console.log('Produto inválido!')
-      response = Number(prompt('Escolha um produto: '))
+      idProduct = Number(prompt('Escolha um produto: '))
     }
 
-    return products.find(product => product.id === response)
+    let qty = Number(prompt('Qual a quantidade desejada?: '))
+    while (!qty || qty > productMap[idProduct + ''] || qty < 1) {
+      console.log('Quantidade inválida!')
+      qty = Number(prompt('Qual a quantidade desejada?: '))
+    }
+
+    const product = products.find(product => product.id === idProduct)
+
+    return { product, qty }
   }
 
-  static async listProducts() {
+  static async listAndSelectProducts() {
     console.log('\nEstes são todos os produtos disponíveis no momento:')
     const { products } = await ProductClient.list({})
     products.forEach(product => {
       console.log(`${product.id}: ${product.description}. Preço: ${product.price}. Estoque: ${product.stock}.`)
     })
 
-    const product = ProductService.selectProduct(products)
+    const choice = ProductService.selectProduct(products)
 
-    return product
+    return choice
   }
 
-  static async listProductsByCategory(category) {
+  static async listAndSelectProductsByCategory(category) {
     const { products } = await ProductClient.ListByCategory({ id: category })
 
     console.log(`\nEstes são todos os produtos disponíveis na categoria selecionada:`)
@@ -35,9 +45,9 @@ class ProductService {
       console.log(`${product.id}: ${product.description}. Preço: ${product.price}. Estoque: ${product.stock}.`)
     })
 
-    const product = ProductService.selectProduct(products)
+    const choice = ProductService.selectProduct(products)
 
-    return product
+    return choice
   }
 }
 

@@ -41,6 +41,7 @@ class ProductService {
 
       return choice
     } catch (err) {
+      if (err.details === 'No connection established') throw { error: 'Sem conexção com o servidor!' }
       console.log(`\n${err.details}`)
     }
   }
@@ -58,6 +59,7 @@ class ProductService {
 
       return choice
     } catch (err) {
+      if (err.details === 'No connection established') throw { error: 'Sem conexção com o servidor!' }
       console.log(`\n${err.details}`)
     }
   }

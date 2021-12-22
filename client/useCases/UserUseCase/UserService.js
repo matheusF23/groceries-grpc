@@ -21,7 +21,8 @@ class UserService {
     try {
       await UserClient.add({ id: userId, name, cellphone, address })
     } catch (err) {
-      console.log(`\n${err.details}`)
+      if (err.details === 'No connection established') throw { error: 'Sem conexção com o servidor!' }
+      console.log(err.details)
     }
   }
 }

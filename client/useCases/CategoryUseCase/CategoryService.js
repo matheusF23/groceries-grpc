@@ -8,6 +8,7 @@ class CategoryService {
       const { categories } = await CategoryClient.list({})
       return categories
     } catch (err) {
+      if (err.details === 'No connection established') throw { error: 'Sem conexção com o servidor!' }
       console.log(`\n${err.details}`)
     }
   }

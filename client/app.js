@@ -31,60 +31,64 @@ async function addProducts(userId, orderId) {
 }
 
 async function main() {
-  console.log('------------------------------------')
-  console.log('# Seja bem vindo ao mercadinho SD! #')
-  console.log('------------------------------------')
+  try {
+    console.log('------------------------------------')
+    console.log('# Seja bem vindo ao mercadinho SD! #')
+    console.log('------------------------------------')
 
-  const userId = uuidv4()
-  const orderId = uuidv4()
-  await UserService.addUser(userId)
+    const userId = uuidv4()
+    const orderId = uuidv4()
+    await UserService.addUser(userId)
 
-  let addProduct = true
-
-  while (true) {
-    if (addProduct) await addProducts(userId, orderId)
+    let addProduct = true
 
     while (true) {
-      const order = await OrderService.listAndGetOrder(orderId, userId)
-      if (order.products.length > 0) {
-        console.log('\nGostaria de remover algum produto?\n1: Sim\n2: Não')
-        const removeProduct = Number(prompt('> '))
-        while (!removeProduct || ![1, 2].includes(removeProduct)) {
-          console.log('Opção inválida')
+      if (addProduct) await addProducts(userId, orderId)
+
+      while (true) {
+        const order = await OrderService.listAndGetOrder(orderId, userId)
+        if (order.products.length > 0) {
           console.log('\nGostaria de remover algum produto?\n1: Sim\n2: Não')
-          removeProduct = Number(prompt('> '))
-        }
+          const removeProduct = Number(prompt('> '))
+          while (!removeProduct || ![1, 2].includes(removeProduct)) {
+            console.log('Opção inválida')
+            console.log('\nGostaria de remover algum produto?\n1: Sim\n2: Não')
+            removeProduct = Number(prompt('> '))
+          }
 
-        if (removeProduct === 1) OrderService.removeProduct(order, userId)
-        else break
-      } else break
-    }
+          if (removeProduct === 1) OrderService.removeProduct(order, userId)
+          else break
+        } else break
+      }
 
-    console.log('\nGostaria de finalizar o pedido?\n1: Sim\n2: Não')
-    let finishOrder = Number(prompt('> '))
-    while (!finishOrder, ![1, 2].includes(finishOrder)) {
-      console.log('Opção inválida')
       console.log('\nGostaria de finalizar o pedido?\n1: Sim\n2: Não')
-      finishOrder = Number(prompt('> '))
-    }
+      let finishOrder = Number(prompt('> '))
+      while (!finishOrder, ![1, 2].includes(finishOrder)) {
+        console.log('Opção inválida')
+        console.log('\nGostaria de finalizar o pedido?\n1: Sim\n2: Não')
+        finishOrder = Number(prompt('> '))
+      }
 
-    if (finishOrder === 1) {
-      console.log('------------------------------------')
-      console.log('# Pedido finalizado com sucesso! #\nVolte Sempre!')
-      console.log('------------------------------------')
-      break
-    }
+      if (finishOrder === 1) {
+        console.log('------------------------------------')
+        console.log('# Pedido finalizado com sucesso! #\nVolte Sempre!')
+        console.log('------------------------------------')
+        break
+      }
 
-    console.log('\nGostaria de adicionar mais um produto?\n1: Sim\n2: Não')
-    let addOneMoreProduct = Number(prompt('> '))
-    while (!addOneMoreProduct, ![1, 2].includes(addOneMoreProduct)) {
-      console.log('Opção inválida')
       console.log('\nGostaria de adicionar mais um produto?\n1: Sim\n2: Não')
-      addOneMoreProduct = Number(prompt('> '))
-    }
+      let addOneMoreProduct = Number(prompt('> '))
+      while (!addOneMoreProduct, ![1, 2].includes(addOneMoreProduct)) {
+        console.log('Opção inválida')
+        console.log('\nGostaria de adicionar mais um produto?\n1: Sim\n2: Não')
+        addOneMoreProduct = Number(prompt('> '))
+      }
 
-    if (addOneMoreProduct === 1) addProduct = true
-    if (addOneMoreProduct === 2) addProduct = false
+      if (addOneMoreProduct === 1) addProduct = true
+      if (addOneMoreProduct === 2) addProduct = false
+    }
+  } catch (err) {
+    console.log(err.error)
   }
 }
 

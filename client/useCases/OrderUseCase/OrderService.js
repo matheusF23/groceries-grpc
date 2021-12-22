@@ -60,6 +60,7 @@ class OrderService {
 
       return order
     } catch (err) {
+      if (err.details === 'No connection established') throw { error: 'Sem conexção com o servidor!' }
       console.log(`\n${err.details}`)
     }
   }

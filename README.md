@@ -15,25 +15,20 @@ Para instalar as dependências use o comando:
 ```
 $ yarn install
 ```
-ou 
-```
-$ npm install
-```
 
 ## Execução do projeto
 Estando na pasta do projeto é necessário executar o servidor e o cliente. Para executar o servidor utilize:
 ```
 $ yarn server
 ```
-ou 
-```
-$ npm server
-```
+
 Para executar o cliente utilize:
 ```
 $ yarn client
 ```
-ou 
-```
-$ npm client
-```
+
+# Fluxo de execução
+
+O projeto objetiva realizar o seguinte fluxo:
+
+![image](https://user-images.githubusercontent.com/54044801/147022921-10a13044-423e-4ee6-a8e3-134b315f075c.png)

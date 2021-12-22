@@ -18,7 +18,11 @@ class UserService {
     let cellphone = getData('telefone')
     let address = getData('endereço')
 
-    await UserClient.add({id: userId, name, cellphone, address})
+    try {
+      await UserClient.add({ id: userId, name, cellphone, address })
+    } catch (err) {
+      console.log(`\n${err.details}`)
+    }
   }
 }
 

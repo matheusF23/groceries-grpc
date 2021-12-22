@@ -4,9 +4,12 @@ const CategoryClient = require('./CategoryClient')
 
 class CategoryService {
   static async getCategories() {
-    const { categories } = await CategoryClient.list({})
-
-    return categories
+    try {
+      const { categories } = await CategoryClient.list({})
+      return categories
+    } catch (err) {
+      console.log(`\n${err.details}`)
+    }
   }
 
   static async getUserCategory() {

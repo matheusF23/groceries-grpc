@@ -19,19 +19,22 @@ class OrderService {
       console.log(`${i}: ${order.products[i].product.description}`)
     }
 
-    let productToBeRemoved = prompt('')
+    let productToBeRemoved = prompt('> ')
     let product = order.products[Number(productToBeRemoved)] || null
     while (!productToBeRemoved || Number(productToBeRemoved) < 0 || !product) {
-      productToBeRemoved = prompt('Escolha uma produto da lista! ')
+      console.log('Escolha uma produto da lista!')
+      productToBeRemoved = prompt('> ')
       product = order.products[Number(productToBeRemoved)] || null
     }
 
     console.log()
 
-    let qty = Number(prompt('Qual a quantidade? '))
+    console.log('Qual a quantidade?')
+    let qty = Number(prompt('> '))
     while (!qty || qty > product.qty) {
       console.log('Quantidade inválida!')
-      qty = Number(prompt('Qual a quantidade? '))
+      console.log('Qual a quantidade?')
+      qty = Number(prompt('> '))
     }
 
     try {
@@ -50,7 +53,7 @@ class OrderService {
     try {
       const order = await OrderClient.list({ id: orderId })
       console.log('------------------------------------')
-      console.log('### Aqui está o seu pedido:###\n')
+      console.log('### Aqui está o seu pedido ###\n')
       order.products.forEach(product => console.log(`${product.qty} ${product.product.description}`))
       console.log(`Valor Total: R$ ${order.totalPrice}`)
       console.log('------------------------------------')

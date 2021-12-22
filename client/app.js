@@ -40,7 +40,7 @@ async function main() {
 
   while (!finish) {
     await addProducts(userId, orderId)
-    await OrderService.listOrder(orderId)
+    await OrderService.listOrder(orderId, userId)
     finish = true
   }
 }

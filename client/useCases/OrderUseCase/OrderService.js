@@ -21,7 +21,7 @@ class OrderService {
 
     let productToBeRemoved = prompt('')
     let product = order.products[Number(productToBeRemoved)] || null
-    while (!productToBeRemoved || !product) {
+    while (!productToBeRemoved || Number(productToBeRemoved) < 0 || !product) {
       productToBeRemoved = prompt('Escolha uma produto da lista! ')
       product = order.products[Number(productToBeRemoved)] || null
     }
@@ -41,30 +41,21 @@ class OrderService {
         userId,
         qty
       })
-      await OrderService.listOrder(order.id, userId)
     } catch (err) {
       console.log(`\n${err.details}`)
     }
   }
 
-  static async listOrder(orderId, userId) {
+  static async listAndGetOrder(orderId, userId) {
     try {
       const order = await OrderClient.list({ id: orderId })
-      console.log('\nAqui está o seu pedido:\n')
+      console.log('------------------------------------')
+      console.log('### Aqui está o seu pedido:###\n')
       order.products.forEach(product => console.log(`${product.qty} ${product.product.description}`))
-      console.log(`Valor Total: R$ ${order.totalPrice}\n`)
+      console.log(`Valor Total: R$ ${order.totalPrice}`)
+      console.log('------------------------------------')
 
-      if (order.products.length > 0) {
-        console.log('Gostaria de remover algum produto?\n1: Sim\n2: Não')
-        const removeProduct = Number(prompt(''))
-        while (!removeProduct || ![1, 2].includes(removeProduct)) {
-          console.log('Opção inválida')
-          console.log('Gostaria de remover algum produto?\n1: Sim\n2: Não')
-          removeProduct = Number(prompt(''))
-        }
-
-        if (removeProduct === 1) OrderService.removeProduct(order, userId)
-      }
+      return order
     } catch (err) {
       console.log(`\n${err.details}`)
     }

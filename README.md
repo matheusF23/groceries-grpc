@@ -1,3 +1,5 @@
+**Participantes**: [Gilson Santos](https://github.com/gilsonsantos03) e [Matheus Figueiredo](https://github.com/matheusF23)
+
 # Groceries gRPC
 
 Esta aplicação é uma implementação do grpc com NodeJS para exemplificar uma comunicação cliente-servidor no cenário de um supermercado.
